@@ -1,0 +1,146 @@
+extends ./layouts/common.pug
+block content
+  nav.navbar.navbar-dark.navbar-expand-lg.fixed-top.bg-dark.flex-md-nowrap.p-0.shadow
+    a.navbar-brand.col-sm-3.col-md-2.mr-0(href='#') Dashboard
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#logout', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #logout.collapse.navbar-collapse.px-3.justify-content-end.pr-3
+      ul.navbar-nav
+        li.nav-item.dropdown
+          a#logoutLink.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') #{data}
+          .dropdown-menu(aria-labelledby='logoutLink')
+            a.dropdown-item(href='#') Profile
+            a.dropdown-item(href='/logout') Logout
+  // DASHBOARD
+  //Desk Card of Total
+  .container-fluid
+    .row
+      nav.col-md-2.d-none.d-md-block.bg-light.sidebar.side
+        .sidebar-sticky
+          ul.nav.flex-column
+            li.nav-item
+              a.nav-link.active(href='/dashboard') Dashboard
+            li.nav-item
+              a.nav-link(href='#') Employee
+      .main.pt-3.px-4.col-md-10
+        section#cards
+          .row.text-center
+            .col-lg-4
+              .card
+                .card-header
+                  h3 Total of Earning
+                .class-body
+                  h3 #{totalEarning}
+            .col-lg-4
+              .card
+                .card-header
+                  h3 Total of vacations
+                .class-body
+                  h3 #{totalVacations}
+            .col-lg-4
+              .card.h-100
+                .card-header
+                  h3 Average benefit
+                .class-body.m-auto
+                  h5 
+        section#employeeTable
+          button.btn.btn-primary(type='button', data-toggle='modal', data-target='#add') Add
+          #add.modal.fade(tabindex='-1', role='dialog', aria-labelledby='title', aria-hidden='true')
+            .modal-dialog.modal-dialog-centered(role='document')
+              .modal-content
+                .modal-header
+                  h5#title.modal-title New User
+                  button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                  form.form-edit(id="addForm",action="dashboard/api/employees",method='POST')
+                    .form-group
+                      input.form-control(type='text',id="inputEmNumber" name='Employee_Number', placeholder='Employee Number', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputEmID" name='idEmployee', placeholder='ID', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputLastName" name='Last_Name', placeholder='Last Name', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputFirstName" name='First_Name', placeholder='First Name', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputSSN" name='SSN', placeholder='SSN', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputPayRate" name='Pay_Rate', placeholder='Pay Rate', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputPayRateID" name='PayRates_id', placeholder='Pay Rate ID', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputVacationDays" name='Vacation_Days', placeholder='Vacation days', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputPaidToDate" name='Paid_To_Date', placeholder='Paid to Date', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputPaidLastYear" name='Paid_Last_Year', placeholder='Paid last year', required='')
+                    .d-flex.justify-content-end
+                      button.btn.btn-secondary.mr-3(type='button', data-dismiss='modal') Close
+                      button.btn.btn-primary(type='submit' id='#btnAdd') Add
+          table.table.table-striped.table-bordered.table-hover
+            caption(style="caption-side:top") Employee
+            thead
+              tr
+                th Employee Number
+                th ID
+                th Last Name
+                th First Name
+                th SSN
+                th Pay Rate
+                th Pay Rate ID
+                th Vacation days
+                th Paid to Date
+                th Paid last year
+                th 
+            tbody
+        section#personalTable.mt-5
+          button.btn.btn-primary(type='button', data-toggle='modal', data-target='#addPersonal') Add
+          #addPersonal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='title', aria-hidden='true')
+            .modal-dialog.modal-dialog-centered(role='document')
+              .modal-content
+                .modal-header
+                  h5#title.modal-title New User
+                  button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                  form.form-edit(id="addPersonalForm",action="dashboard/api/personal",method='POST')
+                    .form-group
+                      input.form-control(type='text',id="inputEmployee_ID" name='Employee_ID', placeholder='Employee ID', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputFirst_Name" name='First_Name', placeholder='First_Name', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputLast_Name" name='Last_Name', placeholder='Last Name', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputMiddle_Initial" name='Middle_Initial', placeholder='Middle_Initial', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputAddress" name='Address', placeholder='Address', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputCity" name='City', placeholder='City', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputState" name='State', placeholder='State', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputEmail" name='Email', placeholder='Email', required='')
+                    .form-group
+                      input.form-control(type='text',id="inputPhone_Number" name='Phone_Number', placeholder='Phone Number', required='')
+                    .d-flex.justify-content-end
+                      button.btn.btn-secondary.mr-3(type='button', data-dismiss='modal') Close
+                      button.btn.btn-primary(type='submit' id='#btnAdd') Add
+          table.table.table-striped.table-bordered.table-hover
+            caption(style="caption-side:top") Personal Information
+            thead
+              tr
+                th Employee ID
+                th First Name
+                th Last Name
+                th Middle Initial
+                th Address
+                th City
+                th State
+                th Email
+                th Phone Number
+                th
+            tbody
+              
+              
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+  script(src='index.js')

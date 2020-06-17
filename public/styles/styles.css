@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    padding:0;
+}
+
+.side{
+    padding-top: 48px;
+}
+.sidebar-sticky{
+    position: sticky;
+    top:0;
+    height: calc(100vh - 48px);
+    overflow-y: hidden;
+    overflow-y: auto;
+}
+
+#cards{
+    padding:96px 30px 48px;
+}
+.parent{
+    width: 100%;
+    height: 100%;
+    padding: 13%;
+}
+.form-signin{
+    width: 100%;
+    max-width:330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-control{
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}

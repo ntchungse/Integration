@@ -1,0 +1,13 @@
+extends ./layouts/common.pug
+block content
+    .text-center.bg-light.parent.d-flex.justify-content-center.align-items-center
+        form.form-signin(action="/login",method="POST")
+            h1.h3.mb-3.font-weight-normal Sign in
+            label.sr-only(for='inputUser') Username
+            input#inputUser.form-control.mb-3(type='text', name='username', placeholder='Username', required='', autofocus='')
+            label.sr-only(for='inputPassword') Password
+            input#inputPassword.form-control(type='password',name='password', placeholder='Password', required='')
+            button.btn.btn-lg.btn-primary.btn-block.mt-5(type='submit') Sign in
+            if errors
+                each error in errors
+                    .alert.alert-danger.mt-3= error
